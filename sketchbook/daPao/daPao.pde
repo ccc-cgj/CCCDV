@@ -1,0 +1,92 @@
+int x=int(random(1, 6)), y=1;
+int pao,z=1;
+ArrayList<pao> paoMen;
+IntList xMen;
+IntList yMen;
+int MouseY;
+float paoSe;
+color c=color(random(255),random(255),random(255));
+class pao {
+  float paoX, paoY, paoW, paoH, paoV;
+  pao() {
+    paoW=50;
+    paoH=50;
+    paoV=20;
+  }
+  void da() {
+    fill(random(255),random(255),random(255),paoSe);
+    textSize(100);
+    text("flap",paoX, paoY-50);
+  }
+}
+void setup() {
+  size(displayWidth, displayHeight);
+  if (frame!=null)frame.setResizable(true);
+  background(255);
+  paoMen=new ArrayList<pao>();
+  xMen=new IntList();
+  yMen=new IntList();
+  xMen.append(x);
+  yMen.append(y);
+  paoSe=0;
+}
+
+void draw() {
+  stroke(0);
+  for (int i=1;i<6;i++) {
+    line(width*i/5, 0, width*i/5, height);
+    line(0, height*i/5, width, height*i/5);
+  }
+  pao=int(mouseX/(width/5))+1;
+  if (y==6) {
+    background(255);
+    fill(0);
+    textAlign(CENTER);
+    textSize(100);
+    text("-=FLAP=-", width/2, height/2-50);
+    noLoop();
+  }
+  if(z>1){
+    if(paoMen.get(paoMen.size()-1).paoY>MouseY+100){
+      paoMen.get(paoMen.size()-1).paoY-=paoMen.get(paoMen.size()-1).paoV;
+      paoMen.get(paoMen.size()-1).da();
+    }
+  }
+  paoSe+=255*20/( height-MouseY);
+  /* cheating mode
+  println(xMen);
+  println(yMen);
+  */
+}
+
+void mouseClicked() {
+  if (pao==x && (mouseY/(height/5))+1==y) {
+    background(255);
+    fill(255,0,0);
+    textAlign(CENTER);
+    textSize(200);
+    text("-=FLAP=-", width/2, height/2-100);
+    noLoop();
+  }
+  else {
+    background(255);
+    fill(0);
+    textAlign(CENTER);
+    textSize(100);
+    text("flap", width/2, height/2-50);
+  }
+  paoMen.add(new pao());
+  paoMen.get(paoMen.size()-1).paoX=mouseX;
+  paoMen.get(paoMen.size()-1).paoY=height;
+  fill(c);
+  noStroke();
+  rectMode(CENTER);
+  rect((xMen.get(xMen.size()-1))*width/5-width/10,(yMen.get(yMen.size()-1))*height/5-height/10,width/5-50,height/5-50);
+  x=int(random(1, 6));
+  y++;
+  z++;
+  xMen.append(x);
+  yMen.append(y);
+  MouseY=mouseY;
+  paoSe=0;
+}

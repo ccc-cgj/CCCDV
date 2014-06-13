@@ -1,9 +1,11 @@
 int x=int(random(1, 6)), y=1;
-int pao,z=1;
+int pao, z=1;
 ArrayList<pao> paoMen;
 IntList xMen;
 IntList yMen;
-int MouseY;
+float MouseY=1;
+int paoSe;
+color c=color(random(255), random(255), random(255));
 class pao {
   float paoX, paoY, paoW, paoH, paoV;
   pao() {
@@ -12,9 +14,10 @@ class pao {
     paoV=20;
   }
   void da() {
-    fill(0,128);
+    noStroke();
+    fill(c, paoSe);
     textSize(100);
-    text("PAO",paoX, paoY-50);
+    text("PAO", paoX, paoY-50);
   }
 }
 void setup() {
@@ -26,6 +29,7 @@ void setup() {
   yMen=new IntList();
   xMen.append(x);
   yMen.append(y);
+  paoSe=0;
 }
 
 void draw() {
@@ -38,27 +42,30 @@ void draw() {
   if (y==6) {
     background(255);
     fill(0);
+    noStroke();
     textAlign(CENTER);
     textSize(100);
     text("Game Over", width/2, height/2-50);
     noLoop();
   }
-  if(z>1){
-    if(paoMen.get(paoMen.size()-1).paoY>MouseY+100){
+  if (z>1) {
+    if (paoMen.get(paoMen.size()-1).paoY>MouseY+100) {
       paoMen.get(paoMen.size()-1).paoY-=paoMen.get(paoMen.size()-1).paoV;
       paoMen.get(paoMen.size()-1).da();
     }
   }
+  paoSe+=20*255/( height-MouseY);
   /* cheating mode
-  println(xMen);
-  println(yMen);
-  */
+   println(xMen);
+   println(yMen);
+   */
 }
 
 void mouseClicked() {
   if (pao==x && (mouseY/(height/5))+1==y) {
     background(255);
-    fill(255,0,0);
+    fill(255, 0, 0);
+    noStroke();
     textAlign(CENTER);
     textSize(200);
     text("HIT", width/2, height/2-100);
@@ -67,6 +74,7 @@ void mouseClicked() {
   else {
     background(255);
     fill(0);
+    noStroke();
     textAlign(CENTER);
     textSize(100);
     text("missed", width/2, height/2-50);
@@ -74,13 +82,18 @@ void mouseClicked() {
   paoMen.add(new pao());
   paoMen.get(paoMen.size()-1).paoX=mouseX;
   paoMen.get(paoMen.size()-1).paoY=height;
-  fill(0);
+  fill(random(255), random(255), random(255));
+  noStroke();
   rectMode(CENTER);
-  rect((xMen.get(xMen.size()-1))*width/5-width/10,(yMen.get(yMen.size()-1))*height/5-height/10,width/5-50,height/5-50);
+  rect((xMen.get(xMen.size()-1))*width/5-width/10, (yMen.get(yMen.size()-1))*height/5-height/10, width/5-50, height/5-50);
   x=int(random(1, 6));
   y++;
   z++;
   xMen.append(x);
   yMen.append(y);
   MouseY=mouseY;
+  paoSe=0;
 }
+void config() {
+}
+
