@@ -31,8 +31,10 @@ void draw() {
   }
   loadPixels();
   if (pixels[mouseY*width+mouseX]==color(0)) {
+    fill(255,0,0);
     text("Boom", mouseX, mouseY);
   }
+  updatePixels();
 }
 void mouseClicked() {
   Balls.add(new ball());

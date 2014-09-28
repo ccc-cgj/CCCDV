@@ -9,8 +9,7 @@ void setup() {
 void draw() {
   if (b) {
     dothaha();
-  }
-  else {
+  } else {
     panache();
   }
 }
@@ -35,7 +34,7 @@ void panache() {
   bx=noise(a+40)*width, by=noise(a+50)*width;
   loadPixels();
   colorMode(RGB, width, width, width);
-  for (int i=0;i<pixels.length;i++) {
+  for (int i=0; i<pixels.length; i++) {
     pixels[i]=color(
     width-dist(i%width, int(i/width), rx, ry), 
     width-dist(i%width, int(i/width), gx, gy), 
@@ -46,11 +45,6 @@ void panache() {
   a+=.01;
 }
 void mouseClicked() {
-  if (b) {
-    b=false;
-  }
-  else {
-    b=true;
-  }
+  b = !b;
 }
 
