@@ -3,7 +3,7 @@ PImage destination;  // Destination image
 
 void setup() {
   size(552, 748);
-  source = loadImage("Peter.jpg");  
+  source = loadImage("peter1.jpg");  
   // The destination image is created as a blank image the same size as the source.
   destination = createImage(source.width, source.height, RGB);
 }
