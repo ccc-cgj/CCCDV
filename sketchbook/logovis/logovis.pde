@@ -6,17 +6,12 @@ void setup() {
   if (frame != null) frame.setResizable(true);
   textFont(createFont("Helvetica", 200, true));
   noStroke();
-  fill(0);
+  colorMode(HSB);
   textAlign(CENTER, CENTER);
 }
 void draw() {
   //background
   background(255);
-
-  //rotate with mouseY
-  pushMatrix();
-  rotateX(radians(mouseY - height / 2) / 10);
-  popMatrix();
 
   //setting delta mouseX
   dx = mouseX - pmouseX;
@@ -25,22 +20,25 @@ void draw() {
   //first
   pushMatrix();
   translate(width / 2 - textWidth(c), height / 2, 0);
-  rotateX(radians(mouseY - height / 2) / 10);
+  rotateX(-radians(mouseY - height / 2) / 10);
   rotateY(dx / 200);
+  fill(frameCount % 255, 255, 255);
   text(c, 0, 0, 0);
   popMatrix();
   //second
   pushMatrix();
   translate(width / 2, height / 2, 0);
-  rotateX(radians(mouseY - height / 2) / 10);
+  rotateX(-radians(mouseY - height / 2) / 10);
   rotateY(dx / 200);
+  fill((frameCount + 255 / 3) % 255, 255, 255);
   text(c, 0, 0, 0);
   popMatrix();
   //third
   pushMatrix();
   translate(width / 2 + textWidth(c), height / 2, 0);
-  rotateX(radians(mouseY - height / 2) / 10);
+  rotateX(-radians(mouseY - height / 2) / 10);
   rotateY(dx / 200);
+  fill((frameCount + 510 / 3) % 255, 255, 255);
   text(c, 0, 0, 0);
   popMatrix();
 }
